@@ -1,0 +1,153 @@
+<html>
+
+
+<head> 
+    <link href="assets/css/styles.css" rel="stylesheet">
+    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <header id="header" class="header-top">
+      <div class="container">
+        <h1><a href="../index.html" style="text-decoration: none;">Kevin Chapman</a></h1>
+        <nav id="navbar" class="navbar">
+            <ul>
+            <li><a class="nav-link" href="https://kachapmansmcm.github.io/index.html">Home</a></li>
+            <li><a class="nav-link" href="https://kachapmansmcm.github.io/index.html#about">About</a></li>
+            <li><a class="nav-link active" href="https://kachapmansmcm.github.io/index.html#projects">Projects</a></li>
+            </ul>
+        </nav>
+      </div>
+    </header>
+</head>
+
+
+<body>
+    <section>
+
+        <div class="container">
+            <div class="section-title">
+                <h2>PacMen Exercise</h2>    
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                  <p class="fst-italic">This project will add PacMen images that will bounce around the container</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <button type="button" class="btn btn-primary" onclick='makeOne()'>Add PacMan</button>
+                    <button type="button" class="btn btn-success" onclick='start()'>Start Game</button>
+                    <button type="button" class="btn btn-secondary" onclick='stop()'>Stop Game</button>
+                    <button type="button" class="btn btn-warning" onclick='location.reload()'>Clear Game</button>
+                </div>
+            </div> 
+            <div class="row" style="padding: 10px;"">
+                <div class="col-lg-12 game-box" id="game-box"></div>
+            </div>
+        </div>
+    </section>
+</body>
+
+
+<SCRIPT>
+    var pos = 0;
+    const pacArray = [
+        ['PacMan1.png', 'PacMan2.png'],
+        ['PacMan3.png', 'PacMan4.png']
+    ];
+    var direction = 0;
+    const pacMen = []; // This array holds all the pacmen
+    const game = document.getElementById('game-box');
+    var divPosition = game.getBoundingClientRect();
+    let padding = 100;
+    var left_pos = divPosition.x;
+    var top_pos = divPosition.top - padding;
+    var bottom = divPosition.bottom - padding;
+    console.log(divPosition);
+    console.log(left_pos);
+    console.log(`top=${top_pos}`);
+    console.log(bottom);
+    
+    function setToRandom(scale) {
+        return {
+            x: Math.random() * scale,
+            y: Math.random() * scale
+        }
+    }
+    // Factory to make a PacMan at a random position with random velocity
+    function makePac() {
+        // returns an object with random values scaled {x: 33, y: 21}
+        let velocity = setToRandom(10); // {x:?, y:?}
+        let position = setToRandom(200);
+        console.log(position);
+        position.x = position.x + left_pos;
+        position.y = position.y + top_pos;
+        console.log(position);
+        // Add image to div id = game
+        //let game = document.getElementById('game-box');
+        let newimg = document.createElement('img');
+        newimg.style.position = 'absolute';
+        newimg.src = 'PacMan1.png';
+        newimg.width = 100;
+        newimg.style.left = position.x;
+        newimg.style.top = position.y;
+        //
+        // set position here 
+        //
+
+        // add new Child image to game
+        game.appendChild(newimg);
+        // return details in an object
+        return {
+            position,
+            velocity,
+            newimg
+        }
+    }
+
+    var isRunning = false;
+    let timeout = null;
+    function update() {
+        //loop over pacmen array and move each one and move image in DOM
+        pacMen.forEach((item) => {
+            checkCollisions(item)
+            item.position.x += item.velocity.x;
+            item.position.y += item.velocity.y;
+
+            item.newimg.style.left = item.position.x;
+            item.newimg.style.top = item.position.y;
+        })
+        if(!isRunning) isRunning = true;
+        
+        timeout = setTimeout(update, 20);
+        
+    }
+
+    function checkCollisions(item) {
+        //
+        // detect collision with all walls and make pacman bounce
+        //
+        if (item.position.x + item.velocity.x + item.newimg.width > (game.clientWidth + left_pos) ||
+            item.position.x + item.velocity.x < left_pos) {
+                item.velocity.x = -item.velocity.x;
+            }
+        if (item.position.y + item.velocity.y + item.newimg.height > (bottom)||
+            item.position.y + item.velocity.y < top_pos) {
+                item.velocity.y = -item.velocity.y;
+            }
+    }
+
+    function makeOne() {
+        pacMen.push(makePac()); // add a new PacMan
+    }
+
+    function start(){
+        if(!isRunning) update();
+    }
+
+    function stop() {
+        isRunning = false;
+        clearTimeout(timeout);        
+    }
+</SCRIPT>
+
+</html>

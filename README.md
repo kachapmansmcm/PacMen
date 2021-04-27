@@ -37,6 +37,7 @@
       </ul>
     </li>
     <li><a href="#usage">Usage</a></li>
+    <li><a href="#roadmap">Roadmap</a></li>
     <li><a href="#license">License</a></li>
   </ol>
 </details>
@@ -79,7 +80,11 @@ This is a simple webpage that can be hosted from any basic HTTP server.
 
 This is a Github pages website to demonstrate DOM manipulation.
 
+<!-- ROADMAP -->
+## Roadmap
 
+Changes I would like to make to this project in the future are:
+* I will find a better way to delay how often the PacMan animation updates.  I am not happy with the current working solution.
 
 
 <!-- LICENSE -->

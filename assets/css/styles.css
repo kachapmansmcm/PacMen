@@ -1,3 +1,5 @@
+/*Styling for consitent look across pages with navbar*/
+
 body {
   font-family: "Open Sans", sans-serif;
   background-color: #040404;
@@ -18,11 +20,6 @@ body::before {
   z-index: -1;
 }
 
-@media (min-width: 1024px) {
-  body::before {
-    background-attachment: fixed;
-  }
-}
 
 a {
   color: #18d26e;
@@ -195,19 +192,9 @@ section {
 }
 
 
-
 section .container {
   background: rgba(0, 0, 0, 0.7);
   padding: 30px;
-}
-
-@media (max-width: 768px) {
-  section {
-    top: 120px;
-  }
-  section.section-show {
-    top: 80px;
-  }
 }
 
 .section-title h2 {
@@ -241,8 +228,7 @@ section .container {
   color: #fff;
 }
 
-
-
+/*specific to this page*/
 .game-box {
   border: solid 2px whitesmoke;
   height: 600;

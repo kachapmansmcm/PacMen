@@ -8,7 +8,7 @@
   <h3 align="center">PacMen Exercise</h3>
 
   <p align="center">
-   This progect is designed to demonstate the ability to manipulate the DOM and update elements on the page using javascript.
+   This project is designed to demonstate the ability to manipulate the DOM and update elements on the page using javascript.
     <br />
     <a href="https://github.com/kachapmansmcm/PacMen"><strong>Explore the docs »</strong></a>
     <br />
